@@ -13,15 +13,18 @@ class Button extends React.Component {
 
     // Para usar esos datos en un componente nieto (Field y Button), es accedera al contexto con la propiedad this.context!! */
 
-    renderSubmit = value => {
-        return value === 'english' ? 'Submit' : 'Voorleggen';
+    renderSubmit = language => {
+        return language === 'english' ? 'Submit' : 'Voorleggen';
     }
 
     renderSubmitButton = (color) => {
         return (
             <button className={`ui button ${color}`}>
                 <LanguageContext.Consumer>
-                    {(value) => this.renderSubmit(value)}
+                {/* Usando LanguageContext (después de haber creado LanguageStore). Ya que el contexto es un objeto que contiene el language, más el callback, hay que hacer una destructuración */}
+                {({language}) => this.renderSubmit(language)}
+
+                    {/* {(value) => this.renderSubmit(value)} */}
                 </LanguageContext.Consumer>
             </button>
         )
